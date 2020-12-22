@@ -104,17 +104,16 @@ Cell[][] cells;
 		for(int i = 0;i< cells.length; i++){
 			for(int j = 0; j<cells[i].length; j++){
 				livingNeighbors[i][j] = getLivingNeighbors(cells[i][j].getX(), cells[i][j].getY());
-			}
+			
 	
 		//8. check if each cell should live or die
-			if(cells[i][j] == ____){
-				cells[i][j].isAlive();
 			}
-			
-			//**** YOU ARE WORKING HERE***
-			// TRY TO FIND OUT WHAT YOU SHOULD CHECK TO DETERMINE THE LIFE OR DEATH OF A CELL. 
 		}
-		
+		for(int i =0; i< cells.length; i++){
+			for(int j = 0; j< cells[i].length; j++){
+				cells[i][j].liveOrDie(livingNeighbors[i][j]);
+			}
+		}
 		
 		repaint();
 	}
@@ -124,7 +123,49 @@ Cell[][] cells;
 	//   living neighbors there are of the 
 	//   cell identified by x and y
 	public int getLivingNeighbors(int x, int y){
-		return 0;
+		int NumOfLN =0;
+		
+		//top
+		if(y<cellsPerRow && cells[x][y+1].isAlive == true){
+			NumOfLN++;
+		}
+		
+		//bottom
+		if(y>0 && cells[x][y-1].isAlive == true){
+			NumOfLN++;
+		}
+		
+		//right
+		if(x<cellsPerRow && cells[x+1][y].isAlive == true){
+			NumOfLN++;
+		}
+		
+		//left
+		if(x>0 && cells[x-1][y].isAlive == true){
+			NumOfLN++;
+		}
+		
+		//top left
+		if(x<cellsPerRow && y<cellsPerRow && cells[x+1][y+1].isAlive == true){
+			NumOfLN++;
+		}
+		
+		//top right
+		if(x>0 && y<cellsPerRow && cells[x-1][y+1].isAlive == true){
+			NumOfLN++;
+		}
+		
+		//bottom left
+		if(x>0 && y>0 && cells[x-1][y-1].isAlive == true){
+			NumOfLN++;
+		}
+		
+		//bottom right
+		if(x<cellsPerRow && y>0 && cells[x+1][y-1].isAlive == true){
+			NumOfLN++;
+		}
+		
+		return NumOfLN;
 	}
 
 	@Override
@@ -150,7 +191,8 @@ Cell[][] cells;
 		//    which cell is clicked. Then toggle
 		//    the isAlive variable for that cell.
 		
-		
+		//***YOU WERE WORKING HERE ***
+		// YOU JUST STARTED AND NEED TO FIND OUT HOW TO GET THE CELL'S COORDINATES FROM MOUSE COORDINATES
 		
 		
 		repaint();

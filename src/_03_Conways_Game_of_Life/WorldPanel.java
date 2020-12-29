@@ -11,6 +11,8 @@ import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+//***FIX THE PROGRAM RUNNING PART***
+
 public class WorldPanel extends JPanel implements MouseListener, ActionListener {
 	private static final long serialVersionUID = 1L;
 	private int cellsPerRow;
@@ -29,15 +31,16 @@ Cell[][] cells;
 		this.cellsPerRow = cpr;
 	
 		//2. Calculate the cell size.
-		cellSize = 10;
+		cellSize = w/cpr;
 		//3. Initialize the cell array to the appropriate size.
-		cells = new Cell[cellSize][cellsPerRow];
+		cells = new Cell[cellsPerRow][cellsPerRow];
 		//3. Iterate through the array and initialize each cell.
 		//   Don't forget to consider the cell's dimensions when 
 		//   passing in the location.
 		for(int i = 0 ; i<cells.length; i++){
-			for(int j = 0; j<cells[i].length; j++){
-				cells[i][j] = new Cell(cells[i][j].getX(),cells[i][j].getY(),cellSize);
+			for(int j = 0; j<cells[i].length; j++){			
+				
+				cells[i][j] = new Cell(j*cellSize, i*cellSize, cellSize);
 			}
 		}
 	}
@@ -191,8 +194,15 @@ Cell[][] cells;
 		//    which cell is clicked. Then toggle
 		//    the isAlive variable for that cell.
 		
-		//***YOU WERE WORKING HERE ***
-		// YOU JUST STARTED AND NEED TO FIND OUT HOW TO GET THE CELL'S COORDINATES FROM MOUSE COORDINATES
+		//CHECK IF THIS IS CORRECT
+		Cell clicked = cells[e.getY()/cellSize][e.getX()/cellSize];
+		
+		if(clicked.isAlive){
+		clicked.isAlive = false;	
+		}
+		else{
+			clicked.isAlive = true;
+		}
 		
 		
 		repaint();

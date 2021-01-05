@@ -49,9 +49,10 @@ Cell[][] cells;
 		//4. Iterate through each cell and randomly set each
 		//   cell's isAlive memeber to true of false
 		Random r = new Random();
-		int rNum = r.nextInt(2);
+		
 		for(int i = 0;i< cells.length; i++){
 			for(int j = 0; j<cells[i].length; j++){
+				int rNum = r.nextInt(2);
 				if(rNum == 1){
 					cells[i][j].isAlive = true;
 				}else{
@@ -106,7 +107,7 @@ Cell[][] cells;
 		
 		for(int i = 0;i< cells.length; i++){
 			for(int j = 0; j<cells[i].length; j++){
-				livingNeighbors[i][j] = getLivingNeighbors(cells[i][j].getX(), cells[i][j].getY());
+				livingNeighbors[i][j] = getLivingNeighbors(i, j);
 			
 	
 		//8. check if each cell should live or die
@@ -129,9 +130,12 @@ Cell[][] cells;
 		int NumOfLN =0;
 		
 		//top
-		if(y<cellsPerRow && cells[x][y+1].isAlive == true){
-			NumOfLN++;
+		if(y<cellsPerRow-1 ){
+			if(cells[x][y+1].isAlive == true){
+				NumOfLN++;
+			}
 		}
+
 		
 		//bottom
 		if(y>0 && cells[x][y-1].isAlive == true){
@@ -139,7 +143,7 @@ Cell[][] cells;
 		}
 		
 		//right
-		if(x<cellsPerRow && cells[x+1][y].isAlive == true){
+		if(x<cellsPerRow-1 && cells[x+1][y].isAlive == true){
 			NumOfLN++;
 		}
 		
@@ -149,12 +153,12 @@ Cell[][] cells;
 		}
 		
 		//top left
-		if(x<cellsPerRow && y<cellsPerRow && cells[x+1][y+1].isAlive == true){
+		if(x<cellsPerRow-1 && y<cellsPerRow-1 && cells[x+1][y+1].isAlive == true){
 			NumOfLN++;
 		}
 		
 		//top right
-		if(x>0 && y<cellsPerRow && cells[x-1][y+1].isAlive == true){
+		if(x>0 && y<cellsPerRow-1 && cells[x-1][y+1].isAlive == true){
 			NumOfLN++;
 		}
 		
@@ -164,7 +168,7 @@ Cell[][] cells;
 		}
 		
 		//bottom right
-		if(x<cellsPerRow && y>0 && cells[x+1][y-1].isAlive == true){
+		if(x<cellsPerRow-1 && y>0 && cells[x+1][y-1].isAlive == true){
 			NumOfLN++;
 		}
 		

@@ -22,7 +22,9 @@ public class MazeMaker{
 		maze = new Maze(width, height);
 		
 		//4. select a random cell to start
-		Cell ranCell = uncheckedCells.pop();
+		int ranNum = randGen.nextInt(h);
+		int ranNum2 = randGen.nextInt(w);
+		Cell ranCell = new Cell(ranNum, ranNum2);
 		//5. call selectNextPath method with the randomly selected cell
 		selectNextPath(ranCell);
 		
@@ -87,9 +89,14 @@ public class MazeMaker{
 			}
 			
 		}
-		
-		//***LEFT OFF HERE***
-		//FINISH THIS METHOD
+		if(c1.getX() == c2.getX()){
+			if(c1.getY() < c2.getY()){
+				c1.setSouthWall(false);
+			}
+			if(c1.getY() > c2.getY()){
+				c1.setNorthWall(false);
+			}
+		}
 		
 		
 	}
@@ -98,6 +105,48 @@ public class MazeMaker{
 	//   Any unvisited neighbor of the passed in cell gets added
 	//   to the ArrayList
 	private static ArrayList<Cell> getUnvisitedNeighbors(Cell c) {
-		return null;
+		ArrayList<Cell> unvisited = new ArrayList<Cell>();
+		Cell topCell = null;
+		Cell bottomCell = null;
+		Cell leftCell = null;
+		Cell rightCell = null;
+		
+		if(c.getY() < height){
+		topCell = maze.getCell(c.getX(), c.getY()+1);
+		}
+		
+		if(c.getY() > 0){
+		bottomCell = maze.getCell(c.getX(), c.getY()-1);
+		}
+		
+		if(c.getX() >0){
+		leftCell = maze.getCell(c.getX()-1, c.getY());
+		}
+		
+		if(c.getX() < width){
+		rightCell = maze.getCell(c.getX()+1, c.getY());
+		}
+		
+		
+		//top
+		if(c.getY()<height && topCell.hasBeenVisited() == false){
+			unvisited.add(topCell);
+		}
+		
+		//bottom
+		if(c.getY()>0 && bottomCell.hasBeenVisited() == false){
+			unvisited.add(bottomCell);
+		}
+		
+		//left
+		if(c.getX() > 0 && leftCell.hasBeenVisited() == false){
+			unvisited.add(leftCell);
+		}
+		
+		//right
+		if(c.getX() > width && rightCell.hasBeenVisited() ==false){
+			unvisited.add(rightCell);
+		}
+		return unvisited;
 	}
 }

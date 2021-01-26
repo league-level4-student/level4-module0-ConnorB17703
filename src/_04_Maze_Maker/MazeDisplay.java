@@ -28,6 +28,8 @@ public class MazeDisplay extends JPanel{
 		
 		maze = MazeMaker.generateMaze(5, 5);
 		repaint();
+		
+		
 	}
 	
 	@Override

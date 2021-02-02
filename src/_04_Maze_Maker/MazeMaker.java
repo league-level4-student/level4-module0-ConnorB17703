@@ -28,7 +28,32 @@ public class MazeMaker{
 		//5. call selectNextPath method with the randomly selected cell
 		selectNextPath(ranCell);
 		
-		// ***FIGURE OUT HOW TO DETERMINE THE START AND FINISH LINES OF THE MAZE***
+		
+		int randomNum =randGen.nextInt(2);
+		int randY = randGen.nextInt(h);
+		int randX = randGen.nextInt(w);
+		Cell start;
+		Cell finish;
+		
+		//top and bottom
+		if(randomNum == 0){
+			start = maze.getCell(randX, 0);
+			finish = maze.getCell(randX ,h-1 );
+			start.setNorthWall(false);
+			finish.setSouthWall(false);
+		}
+		
+		//left and right
+		if(randomNum == 1){
+			start = maze.getCell(0, randY);
+			finish = maze.getCell(w-1, randY);
+			start.setWestWall(false);
+			finish.setEastWall(false);
+		}
+		
+			
+		
+		
 		
 		return maze;
 	}

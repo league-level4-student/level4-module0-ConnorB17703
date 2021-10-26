@@ -21,6 +21,7 @@ public class PixelArtMaker implements MouseListener, ActionListener{
 	private GridPanel gp;
 	ColorSelectionPanel csp;
 	JButton saveButton = new JButton("Save");
+	JButton loadButton = new JButton ("Load");
 	
 	//Create a load button and code to load in previously saved art. You already finished saving the art.
 	
@@ -32,6 +33,7 @@ public class PixelArtMaker implements MouseListener, ActionListener{
 		window.setResizable(false);
 		
 		saveButton.addActionListener(this);
+		loadButton.addActionListener(this);
 		
 		window.add(gip);
 		window.pack();
@@ -46,6 +48,7 @@ public class PixelArtMaker implements MouseListener, ActionListener{
 		window.add(gp);
 		window.add(csp);
 		window.add(saveButton);
+		window.add(loadButton);
 		gp.repaint();
 		gp.addMouseListener(this);
 		window.pack();
@@ -112,8 +115,16 @@ public class PixelArtMaker implements MouseListener, ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if(arg0.getSource() == saveButton){
-			System.out.println("asdflakjp;");
+			System.out.println("Saved");
 			save(gp);
+		}
+		if(arg0.getSource() == loadButton){
+			System.out.println("Loaded");
+			window.remove(gp);
+			gp = load();
+			window.add(gp);
+			gp.addMouseListener(this);
+			window.pack();
 		}
 	}
 	
